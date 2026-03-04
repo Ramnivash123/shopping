@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+</head>
+
+<body style="margin:0; font-family:Arial; background-color:#e8f5e9;">
+
+    <!-- Header -->
+    <div style="background:#2e7d32; padding:20px;">
+        <h2 style="color:white; margin:0;">My Orders</h2>
+    </div>
+
+    <!-- Orders Table -->
+    <div style="padding:40px;">
+
+        <table style="width:100%; border-collapse:collapse;
+                      background:white;
+                      box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+
+            <tr style="background:#4caf50; color:white;">
+                <th style="padding:12px; border:1px solid #ddd;">Product Name</th>
+                <th style="padding:12px; border:1px solid #ddd;">Price</th>
+                <th style="padding:12px; border:1px solid #ddd;">Quantity</th>
+                <th style="padding:12px; border:1px solid #ddd;">Total</th>
+                <th style="padding:12px; border:1px solid #ddd;">Delivery Address</th>
+            </tr>
+
+            {% for item in cart_data %}
+            <tr style="text-align:center;">
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.name }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd;
+                           color:#2e7d32; font-weight:bold;">
+                    ₹{{ item.price }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.qty }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd; font-weight:bold;">
+                    ₹{{ item.total }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.address }}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="padding:20px; text-align:center; color:gray;">
+                    No Orders Found
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body style="margin:0; font-family: Arial, sans-serif; background-color:#e8f5e9;">
+
+    <!-- Top Navigation Bar -->
+    <div style="background:#2e7d32; padding:15px 30px; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="color:white; margin:0;">Admin Dashboard</h3>
+
+        <a href="/signout"
+           style="background:white; color:#2e7d32; text-decoration:none;
+                  padding:8px 15px; border-radius:5px; font-weight:bold;">
+            Logout
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div style="max-width: 900px; margin: 40px auto; background: white; padding: 30px;
+                border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1);">
+
+        <h2 style="text-align:center; color:#2e7d32;">Registered Users</h2>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top:20px;">
+            <tr style="background-color: #2e7d32; color: white;">
+                <th style="padding: 12px; border: 1px solid #c8e6c9;">ID</th>
+                <th style="padding: 12px; border: 1px solid #c8e6c9;">Username</th>
+                <th style="padding: 12px; border: 1px solid #c8e6c9;">Is_Superuser</th>
+                <th style="padding: 12px; border: 1px solid #c8e6c9;">Edit</th>
+                <th style="padding: 12px; border: 1px solid #c8e6c9;">Delete</th>
+            </tr>
+
+            {% for usr in usrs %}
+            <tr style="text-align:center;">
+                <td style="padding: 10px; border: 1px solid #e0e0e0;">
+                    {{ usr.id }}
+                </td>
+                <td style="padding: 10px; border: 1px solid #e0e0e0;">
+                    {{ usr.username }}
+                </td>
+                <td style="padding: 10px; border: 1px solid #e0e0e0;">
+                    {{ usr.is_superuser }}
+                </td>
+                <td style="padding: 10px; border: 1px solid #e0e0e0;">
+                    <a href="/edit/{{usr.id}}">Edit</a>
+                </td>
+                <td style="padding: 10px; border: 1px solid #e0e0e0;">
+                    <a href="/delete/{{usr.id}}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2" style="padding: 15px; text-align: center;">
+                    No users found
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</body>
+</html>

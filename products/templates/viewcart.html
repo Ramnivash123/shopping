@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart</title>
+</head>
+
+<body style="margin:0; font-family:Arial; background-color:#e8f5e9;">
+
+    <!-- Header -->
+    <div style="background:#2e7d32; padding:20px;">
+        <h2 style="color:white; margin:0;">My Cart</h2>
+    </div>
+
+    <!-- Table Container -->
+    <div style="padding:40px;">
+
+        <table style="width:100%; border-collapse:collapse; background:white;
+                      box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+
+            <tr style="background:#4caf50; color:white;">
+                <th style="padding:12px; border:1px solid #ddd;">Product Name</th>
+                <th style="padding:12px; border:1px solid #ddd;">Price</th>
+                <th style="padding:12px; border:1px solid #ddd;">Quantity</th>
+                <th style="padding:12px; border:1px solid #ddd;">Total Price</th>
+                <th style="padding:12px; border:1px solid #ddd;">Delete</th>
+            </tr>
+
+            {% for item in cart_data %}
+            <tr style="text-align:center;">
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.name }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd; color:#2e7d32; font-weight:bold;">
+                    ₹{{ item.price }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.qty }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd; font-weight:bold;">
+                    ₹{{ item.total }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd; font-weight:bold;">
+                    <a href="/deletecart/{{item.id}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+        <!-- Checkout Section -->
+        <div style="margin-top:30px; background:white; padding:20px;
+                    box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+
+            <form action="/checkout/" method="POST">
+                {% csrf_token %}
+
+                <div style="margin-bottom:15px;">
+                    <label style="font-weight:bold;">Delivery Address:</label><br><br>
+                    <input type="text" name="address" placeholder="Enter your delivery address"
+                           required
+                           style="width:100%; padding:10px; border:1px solid #ccc;
+                                  border-radius:5px;">
+                </div>
+
+                <a href="#" onclick="this.closest('form').submit();"
+                   style="display:inline-block; padding:12px 25px;
+                          background:#2e7d32; color:white; text-decoration:none;
+                          border-radius:5px; font-weight:bold;">
+                    Checkout
+                </a>
+
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

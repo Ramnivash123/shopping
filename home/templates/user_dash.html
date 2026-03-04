@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+</head>
+<body style="margin:0; font-family: Arial, sans-serif; background-color:#e8f5e9;">
+
+    <!-- Top Bar -->
+    <div style="background:#2e7d32; padding:15px 30px;
+            display:flex; justify-content:space-between;
+            align-items:center;">
+
+        <h3 style="color:white; margin:0;">User Dashboard</h3>
+
+        <!-- Right Side Buttons -->
+        <div>
+            <a href="/orders"
+               style="background:white; color:#2e7d32; text-decoration:none;
+                      padding:8px 15px; border-radius:5px;
+                      font-weight:bold; margin-right:10px;">
+                Orders
+            </a>
+
+            <a href="/signout"
+               style="background:white; color:#2e7d32; text-decoration:none;
+                      padding:8px 15px; border-radius:5px; font-weight:bold;">
+                Logout
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div style="display:flex; justify-content:center; align-items:center; height:85vh;">
+        <div style="background:white; padding:40px; width:500px;
+                    border-radius:10px; box-shadow:0 6px 15px rgba(0,0,0,0.1);
+                    text-align:center;">
+
+            <h2 style="color:#2e7d32; margin-bottom:20px;">
+                Welcome {{ user.username }}
+            </h2>
+
+            <p style="color:#555; font-size:16px;">
+                You are successfully logged in.
+            </p>
+
+            <a href="/viewcart"
+               style="display:inline-block; margin-top:25px;
+                      background:#2e7d32; color:white;
+                      text-decoration:none; padding:12px 25px;
+                      border-radius:6px; font-size:16px; font-weight:bold;">
+                View Cart
+            </a>
+
+            <a href="/products"
+               style="display:inline-block; margin-top:25px;
+                      background:#2e7d32; color:white;
+                      text-decoration:none; padding:12px 25px;
+                      border-radius:6px; font-size:16px; font-weight:bold;">
+                Browse Shopping
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
