@@ -13,3 +13,4 @@ class Cart(models.Model):
     qty=models.IntegerField()
     status=models.IntegerField()
     address=models.CharField(max_length=100, null=True, blank=True)
+    ord_date=models.DateField(null=True)

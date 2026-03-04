@@ -1,7 +1,10 @@
+from django.db.models import DateField
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from unicodedata import category
 from .models import Products, Cart
+from datetime import date
+
 
 # Create your views here.
 @login_required
@@ -54,7 +57,7 @@ def addcart(request):
         u_id=request.user.id
         p_id=request.POST['product_id']
         qty=request.POST['product_qty']
-        Cart.objects.create(u_id=u_id, p_id=p_id, qty=qty, status=0, address=None)
+        Cart.objects.create(u_id=u_id, p_id=p_id, qty=qty, status=0, address=None, ord_date=None)
         return redirect('/user_dash')
 
 @login_required
@@ -85,7 +88,7 @@ def deletecart(request, id):
 def checkout(request):
     if request.method=='POST':
         address=request.POST['address']
-        Cart.objects.filter().update(status=1, address=address)
+        Cart.objects.filter().update(status=1, address=address, ord_date=date.today())
         return redirect('/user_dash')
 
 @login_required
@@ -102,6 +105,7 @@ def orders(request):
                 'price': product.price,
                 'qty': item.qty,
                 'total': total,
-                'address': item.address
+                'address': item.address,
+                'date': item.ord_date
             })
     return render(request, 'orders.html', context={'cart_data':cart_data})

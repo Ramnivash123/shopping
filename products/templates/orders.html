@@ -24,6 +24,7 @@
                 <th style="padding:12px; border:1px solid #ddd;">Quantity</th>
                 <th style="padding:12px; border:1px solid #ddd;">Total</th>
                 <th style="padding:12px; border:1px solid #ddd;">Delivery Address</th>
+                <th style="padding:12px; border:1px solid #ddd;">Checkout Date</th>
             </tr>
 
             {% for item in cart_data %}
@@ -47,6 +48,10 @@
 
                 <td style="padding:12px; border:1px solid #ddd;">
                     {{ item.address }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.date }}
                 </td>
             </tr>
             {% empty %}
