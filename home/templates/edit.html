@@ -9,7 +9,16 @@
     <div style="max-width: 900px; margin: 40px auto; background: white; padding: 30px;
                 border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1);">
 
-        <h2 style="text-align:center; color:#2e7d32;">Registered Users</h2>
+        <!-- Logo Box -->
+        <div style="width:60px; height:60px; margin:0 auto 20px auto;
+                    background:#2e7d32; color:white;
+                    display:flex; justify-content:center; align-items:center;
+                    font-size:28px; font-weight:bold;
+                    border-radius:12px;">
+            S
+        </div>
+
+        <h2 style="text-align:center; color:#2e7d32;">Edit Users</h2>
 
         <form method="post" action="/edited/{{usr.id}}/">
             {% csrf_token %}
