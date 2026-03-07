@@ -5,7 +5,7 @@ class Products(models.Model):
     name=models.CharField(max_length=100)
     price=models.IntegerField()
     category=models.CharField(max_length=100)
-    image=models.CharField(max_length=100)
+    image=models.ImageField(upload_to='products/')
 
 class Cart(models.Model):
     u_id=models.IntegerField()

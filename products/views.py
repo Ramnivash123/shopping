@@ -1,6 +1,7 @@
 from django.db.models import DateField
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from nltk.app.nemo_app import images
 from unicodedata import category
 from .models import Products, Cart
 from datetime import date
@@ -109,3 +110,12 @@ def orders(request):
                 'date': item.ord_date
             })
     return render(request, 'orders.html', context={'cart_data':cart_data})
+
+@login_required
+def changepic(request, id):
+    if request.method == 'POST':
+        product = Products.objects.get(id=id)
+        product.image = request.FILES['pic']
+        product.save()
+        return redirect('/products')
+
