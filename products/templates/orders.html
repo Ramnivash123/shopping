@@ -31,16 +31,23 @@
                       box-shadow:0 4px 10px rgba(0,0,0,0.1);">
 
             <tr style="background:#4caf50; color:white;">
+                <th style="padding:12px; border:1px solid #ddd;">Name</th>
                 <th style="padding:12px; border:1px solid #ddd;">Product Name</th>
                 <th style="padding:12px; border:1px solid #ddd;">Price</th>
                 <th style="padding:12px; border:1px solid #ddd;">Quantity</th>
                 <th style="padding:12px; border:1px solid #ddd;">Total</th>
                 <th style="padding:12px; border:1px solid #ddd;">Delivery Address</th>
                 <th style="padding:12px; border:1px solid #ddd;">Checkout Date</th>
+                <th style="padding:12px; border:1px solid #ddd;">Status</th>
             </tr>
 
             {% for item in cart_data %}
             <tr style="text-align:center;">
+
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.u_name }}
+                </td>
+
                 <td style="padding:12px; border:1px solid #ddd;">
                     {{ item.name }}
                 </td>
@@ -64,6 +71,10 @@
 
                 <td style="padding:12px; border:1px solid #ddd;">
                     {{ item.date }}
+                </td>
+
+                <td style="padding:12px; border:1px solid #ddd;">
+                    {{ item.status }}
                 </td>
             </tr>
             {% empty %}

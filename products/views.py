@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from nltk.app.nemo_app import images
 from unicodedata import category
 from .models import Products, Cart
-from datetime import date
+from datetime import date, timedelta
 
 
 # Create your views here.
@@ -54,12 +54,29 @@ def products(request, category=None):
 
 @login_required
 def addcart(request):
-    if request.method=='POST':
-        u_id=request.user.id
-        p_id=request.POST['product_id']
-        qty=request.POST['product_qty']
-        Cart.objects.create(u_id=u_id, p_id=p_id, qty=qty, status=0, address=None, ord_date=None)
-        return redirect('/user_dash')
+    if request.method == 'POST':
+        u_id = request.user.id
+        p_id = request.POST['product_id']
+        qty = int(request.POST['product_qty'])
+
+        cart_item = Cart.objects.filter(u_id=u_id, p_id=p_id, status=0).first()
+
+        if cart_item:
+            # Product already in cart → update quantity
+            cart_item.qty += qty
+            cart_item.save()
+        else:
+            # Product not in cart → create new item
+            Cart.objects.create(
+                u_id=u_id,
+                p_id=p_id,
+                qty=qty,
+                status=0,
+                address=None,
+                ord_date=None
+            )
+
+        return redirect('/products')
 
 @login_required
 def viewcart(request):
@@ -100,14 +117,20 @@ def orders(request):
     for item in cart_items:
             product = Products.objects.get(id=item.p_id)
             total = product.price * item.qty
+            if date.today() >= item.ord_date + timedelta(days=7):
+                status='Delivered'
+            else:
+                status='Not Delivered'
 
             cart_data.append({
+                'u_name': request.user.username,
                 'name': product.name,
                 'price': product.price,
                 'qty': item.qty,
                 'total': total,
                 'address': item.address,
-                'date': item.ord_date
+                'date': item.ord_date,
+                'status':status
             })
     return render(request, 'orders.html', context={'cart_data':cart_data})
 
